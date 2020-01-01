@@ -1,10 +1,14 @@
 package com.rmb.controllers;
 
+import java.security.Principal;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,22 +16,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.rmb.Constants;
+import com.rmb.entities.Account;
 import com.rmb.entities.AccountCreationRequest;
+import com.rmb.entities.User;
 import com.rmb.services.AccountService;
+import com.rmb.services.UserService;
 
 @Controller
 public class AccountController {
 
 	@Autowired
+	private UserService userService;
+	
+	@Autowired
 	private AccountService accountService;
 
+
 	@GetMapping("createAccount")
+//	@PreAuthorize("hasPermission('CREATE_ACCOUNT_FOR_ANY_USER')")
 	public String newAccountForm(@RequestParam String pno, Model model, HttpSession session) {
-
-		// model.addAttribute("account", new Account)
+	//	Constants.Permissions.CREATE_ACCOUNT_FOR_ANY_USER
 		session.setAttribute("pno", pno);
-
-		System.out.println("Pno is: " + pno);
+		
 		return "accountCreationForm";
 	}
 
@@ -43,6 +54,20 @@ public class AccountController {
 
 		return "redirect:/users";
 	}
+	
+//	@GetMapping("/transfer")
+//	public String goToTransferPage(Principal principal, Model model) {
+//
+//		User user = userService.findByPno(principal.getName());
+//		List<Account> accounts = accountService.findUserAccounts(user);
+//
+//		model.addAttribute("accounts", accounts);
+//
+//		return "transfer";
+//	}
+	
+	
+	
 //		public void accountClosing() {
 //			
 //			/*

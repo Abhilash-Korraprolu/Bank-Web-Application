@@ -120,4 +120,21 @@ public class UserService {
 		
 		return permissionRepository.findByUsers(user);
 	}
+	
+public List<Permission> getUserPermissions(User user) {
+		
+		return permissionRepository.findByUsers(user);
+	}
+
+	public List<Permission> getUserAdminPermissions() {
+		List<Permission> permissions = getUserPermissions();
+		for (Permission p : permissions)
+			System.out.println(p.getPermission());
+		
+		permissions.removeAll(permissionService.getCustomerPermissions());
+		
+		for (Permission p : permissions)
+			System.out.println(p.getPermission());
+		return permissions;
+	}
 }

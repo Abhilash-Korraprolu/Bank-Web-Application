@@ -21,7 +21,7 @@
 				<td><c:out value="${transaction.name}" /></td>
 				<td><c:out value="${transaction.amount}" /></td>
 				<td><c:out value="${transaction.balance}" /></td>
-				<td><c:out value="${transaction.getTime}" /></td>
+				<td><c:out value="${transaction.timeStamp}" /></td>
 
 			</tr>
 		</c:forEach>

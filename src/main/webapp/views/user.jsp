@@ -23,7 +23,7 @@
 		<c:forEach items="${accounts}" var="account">
 			<tr>
 				<td>
-					<form action="account">
+					<form action="account" method="post">
 						<button class="block" name="accountNumber"
 							value="${account.accountNumber}">
 							<c:out value="${account.accountNumber}" />
@@ -37,6 +37,7 @@
 	</table>
 
 	<br>
-
+	<a href="/transfer"> Transfer </a>
+	
 </body>
 </html>

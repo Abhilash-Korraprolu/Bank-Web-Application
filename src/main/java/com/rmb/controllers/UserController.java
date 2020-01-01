@@ -57,9 +57,8 @@ public class UserController {
 
 	@GetMapping("register")
 	public String getRegisterForm(Model model) {
-
-		List<Permission> permissions = userService.getUserPermissions();
-		permissions.removeAll(permissionService.getCustomerPermissions());
+		
+		List<Permission> permissions = userService.getUserAdminPermissions();	
 		model.addAttribute("permissions", permissions);
 
 		return "registerUser";

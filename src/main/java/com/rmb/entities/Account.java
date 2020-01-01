@@ -111,7 +111,7 @@ public abstract class Account {
 	public void setBalance(double balance) {
 
 		if (balance < minimumBalance)
-			throw new InsufficientFundsException();
+			throw new InsufficientFundsException("Insufficient Funds");
 
 		else
 			this.balance = balance;

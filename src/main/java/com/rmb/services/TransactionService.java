@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rmb.Constants;
 import com.rmb.customExceptions.InvalidAccountException;
+import com.rmb.customExceptions.InvalidTransactionException;
 import com.rmb.entities.Account;
 import com.rmb.entities.Transaction;
 import com.rmb.repositories.AccountRepository;
@@ -30,6 +31,14 @@ public class TransactionService {
 		Account receiver = accountRepository.findById(receiverAccountNumber)
 				.orElseThrow(() -> new InvalidAccountException(receiverAccountNumber));
 		checkAccountStatus(receiver);
+
+		// Could be simply checked in the form
+		if (senderAccountNumber.equals(receiverAccountNumber))
+			throw new InvalidTransactionException("Sender and receiver accounts are same");
+
+		if (!sender.getCurrency().equals(receiver.getCurrency())) {
+//			Feature: Conversion + set amount in sender currency or receiver currency option
+		}
 
 		double senderBalance = sender.getBalance();
 		senderBalance -= amount;
